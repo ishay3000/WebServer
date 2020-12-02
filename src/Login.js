@@ -10,7 +10,8 @@ export default function Login() {
     const axios = Axios.create({
         baseURL: 'https://0.0.0.0:1337'
     })
-    var loginRequest = () => {
+    var loginRequest = (e) => {
+        e.preventDefault();
         axios.post('/login', {
             data: {
                 username: username,
@@ -43,7 +44,7 @@ export default function Login() {
                     <input type="text" id="password" type="password" className="fadeIn third" name="login" placeholder="Password" onChange={e => {
                         setPassword(e.target.value);
                     }} />
-                    <input type="button" className="fadeIn fourth" value="Log In" onClick={loginRequest} />
+                    <input type="submit" className="fadeIn fourth" value="Sign in" onClick={loginRequest} />
                 </form>
             </div>
         </div>
