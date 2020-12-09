@@ -6,6 +6,7 @@ import GuardedRoute from 'react-guarded-route'
 import { Navbar, Nav } from 'react-bootstrap'
 import Menu from './Menu'
 import About from './About'
+import Config from './Config'
 
 
 const CheckUserLogged = (checkIfSignedIn) => {
@@ -20,6 +21,7 @@ const AuthedRoutes = ({ ...props }) => {
         <Menu {...props} />
         <GuardedRoute exact path='/' component={Home} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
         <GuardedRoute path='/about' component={About} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
+        <GuardedRoute path='/config' component={Config} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
       </div>
     </div>
   )
