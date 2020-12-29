@@ -3,10 +3,17 @@ import './App.css';
 import { Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Login from './Login';
 import GuardedRoute from 'react-guarded-route'
-import { Navbar, Nav } from 'react-bootstrap'
 import Menu from './Menu'
 import About from './About'
-import Config from './Config'
+import Config from "./Config.js";
+
+// Scripts
+import 'jquery/dist/jquery.min.js';
+import 'popper.js/dist/popper.min.js';
+import 'bootstrap/dist/js/bootstrap.min.js';
+// Styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 
 const CheckUserLogged = (checkIfSignedIn) => {
@@ -59,23 +66,9 @@ function NotFound() {
   )
 }
 
-// function About() {
-//   return (
-//     <div>
-//       <h1>About</h1>
-//     </div>
-//   )
-// }
-
 function Home() {
   return (
     <div>
-      <h1>Home</h1>
-      <h1>Home</h1>
-      <h1>Home</h1>
-      <h1>Home</h1>
-      <h1>Home</h1>
-      <h1>Home</h1>
       <h1>Home</h1>
     </div>
   )
