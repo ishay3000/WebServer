@@ -9,8 +9,7 @@ class Modal extends Component {
             sessionName: '',
             sessionType: '',
             syncDirectory: '',
-            syslogIP: '',
-            snmpIP: ''
+            bandwidth: ''
         }
     }
 
@@ -19,8 +18,7 @@ class Modal extends Component {
             sessionName: nextProps.sessionName,
             sessionType: nextProps.sessionType,
             syncDirectory: nextProps.syncDirectory,
-            syslogIP: nextProps.syslogIP,
-            snmpIP: nextProps.snmpIP,
+            bandwidth: nextProps.bandwidth
         });
     }
 
@@ -45,27 +43,22 @@ class Modal extends Component {
                             </button>
                         </div>
                         <div>
-                            <div class="content">
+                            <div className="content">
                                 <span className="modal-lable">Session Name:</span>
                                 <input value={this.state.sessionName} onChange={(e) => this.stateHandler('sessionName', e)} />
                             </div>
-                            <div class="content">
-                                <span className="modal-lable">Session Type:</span>
-                                <input value={this.state.sessionType} onChange={(e) => this.stateHandler(this.state.sessionType.name, e)} />
+                            <div className="content">
+                                <span className="modal-lable">Type:</span>
+                                <input value={this.state.sessionType} onChange={(e) => this.stateHandler('sessionType', e)} />
                             </div>
-                            <div class="content">
-                                <span className="modal-lable">Session Sync Directory:</span>
-                                <input value={this.state.syncDirectory} onChange={(e) => this.stateHandler(this.state.syncDirectory, e)} />
+                            <div className="content">
+                                <span className="modal-lable">Sync Directory:</span>
+                                <input value={this.state.syncDirectory} onChange={(e) => this.stateHandler('syncDirectory', e)} />
                             </div>
-                            <div class="content">
-                                <span className="modal-lable">syslogIP:</span>
-                                <input value={this.state.syslogIP} onChange={(e) => this.stateHandler(this.state.syslogIP, e)} />
+                            <div className="content">
+                                <span className="modal-lable">Bandwidth:</span>
+                                <input value={this.state.bandwidth} onChange={(e) => this.stateHandler('bandwidth', e)} />
                             </div>
-                            <div class="content">
-                                <span className="modal-lable">SNMP IP:</span>
-                                <input value={this.state.snmpIP} onChange={(e) => this.stateHandler(this.state.snmpIP, e)} />
-                            </div>
-
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

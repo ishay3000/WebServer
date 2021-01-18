@@ -6,6 +6,8 @@ import GuardedRoute from 'react-guarded-route'
 import Menu from './Menu'
 import About from './About'
 import Config from "./Config.js";
+import Home from "./Home.js";
+
 
 // Scripts
 import 'jquery/dist/jquery.min.js';
@@ -66,12 +68,6 @@ function NotFound() {
   )
 }
 
-function Home() {
-  return (
-    <div>
-      <h1>Home</h1>
-    </div>
-  )
-}
+
 
 export default App;

@@ -15,7 +15,7 @@ const Menu = (props) => {
             <Navbar collapseOnSelect expand="lg" fixed='top' bg="dark" variant='dark'>
                 <Container>
 
-                    <Navbar.Brand href="#home">Smart Channel</Navbar.Brand>
+                    <Navbar.Brand href="/">Smart Channel</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         {/* <Nav className="mr-auto"> */}
