@@ -6,24 +6,26 @@ class Modal extends Component {
         super(props);
         this.handleSave = this.handleSave.bind(this);
         this.state = {
-            sessionName: '',
-            sessionType: '',
-            syncDirectory: '',
-            bandwidth: ''
+            SessionName: '',
+            SyncDirectory: {},
+            Bandwidth: ''
         }
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            sessionName: nextProps.sessionName,
-            sessionType: nextProps.sessionType,
-            syncDirectory: nextProps.syncDirectory,
-            bandwidth: nextProps.bandwidth
+            SessionName: nextProps.SessionName,
+            SyncDirectory: { 'Path': nextProps.SyncDirectory.Path },
+            Bandwidth: { 'Rate': nextProps.Bandwidth.Rate }
         });
     }
 
     stateHandler(stateName, e) {
         this.setState({ [stateName]: e.target.value })
+    }
+
+    innerStateHandler(stateName, innerStateName, e) {
+        this.setState({ [stateName]: { [innerStateName]: e.target.value } })
     }
 
     handleSave() {
@@ -45,19 +47,19 @@ class Modal extends Component {
                         <div>
                             <div className="content">
                                 <span className="modal-lable">Session Name:</span>
-                                <input value={this.state.sessionName} onChange={(e) => this.stateHandler('sessionName', e)} />
+                                <input value={this.state.SessionName} onChange={(e) => this.stateHandler('SessionName', e)} />
                             </div>
-                            <div className="content">
+                            {/* <div className="content">
                                 <span className="modal-lable">Type:</span>
                                 <input value={this.state.sessionType} onChange={(e) => this.stateHandler('sessionType', e)} />
-                            </div>
+                            </div> */}
                             <div className="content">
                                 <span className="modal-lable">Sync Directory:</span>
-                                <input value={this.state.syncDirectory} onChange={(e) => this.stateHandler('syncDirectory', e)} />
+                                <input value={this.state.SyncDirectory.Path} onChange={(e) => this.innerStateHandler('SyncDirectory', 'Path', e)} />
                             </div>
                             <div className="content">
                                 <span className="modal-lable">Bandwidth:</span>
-                                <input value={this.state.bandwidth} onChange={(e) => this.stateHandler('bandwidth', e)} />
+                                <input value={this.state.Bandwidth.Rate} onChange={(e) => this.innerStateHandler('Bandwidth', 'Rate', e)} />
                             </div>
                         </div>
                         <div className="modal-footer">
