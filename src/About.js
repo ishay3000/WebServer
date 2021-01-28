@@ -73,10 +73,24 @@ export default function About() {
                         <h7>
                             <br />
                                 We hope you'll
-                                <br />
-                                 enjoy the security measures our product provides.
-                            </h7>
+                            <br />
+                            enjoy the security measures our product provides.
+                        </h7>
                     </div>
+                </li>
+                <li>
+                        <div className="panel-heading icon">
+                            <i className="glyphicon glyphicon-plus"></i>
+                        </div>                 
+                        <div className="panel-heading">
+                            <h2 className="section-subheading text-muted">DEVELOPED BY:</h2>
+                        </div>                  
+                        <div className="panel-body">
+                            <h5>Hagai Vinik, Ishay Muchtar, Dor Turjeman</h5>
+                        </div>                    
+                        <div className="panel-footer">
+                            <medium>@2020 all rights reserved, R&D Nesher 108. </medium>
+                        </div>
                 </li>
             </ul>
         </div>

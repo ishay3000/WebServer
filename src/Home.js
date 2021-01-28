@@ -8,39 +8,46 @@ export default class Home extends React.Component {
     super(props);
 
     this.replaceModalItem = this.replaceModalItem.bind(this);
+    this.addSession = this.addSession.bind(this);
     this.saveModalDetails = this.saveModalDetails.bind(this);
     this.saveChangesToFile = this.saveChangesToFile.bind(this)
     this.state = {
       requiredItem: 0,
       brochure: [],
-      changedSessions: []
+      changedSessions: [],
+      modification: '',
+      sessions: []
     }
   }
   componentDidMount() {
     axios.get(`https://localhost:1337/sessions`)
       .then(res => {
         const sessions = res.data.Sessions
-        var brochure = []
+        const brochure = [];
         this.setState({ sessions });
-        var index = 0
         this.state.sessions.map(session => {
           var currentSession = Object.values(session)[0]
-          brochure[index] = {
+
+          brochure.push({
             SessionName: currentSession.Name,
             SessionType: currentSession.Type,
             Bandwidth: { Rate: currentSession.Bandwidth.Rate },
             SyncDirectory: { Path: currentSession.SyncDirectory.Path }
-          }
-          ++index
-          this.setState({ brochure });
+          })
+          return brochure
         })
+        this.setState({ brochure });
       })
   }
 
-  replaceModalItem(index) {
+  replaceModalItem(index, modification) 
+  {
     this.setState({
-      requiredItem: index
+      requiredItem: index,
+      modification: modification
     });
+    console.log(index)
+    console.log(modification);
   }
 
   storeChangedSession(session, modification, sessionNameChangedProps) {
@@ -53,7 +60,7 @@ export default class Home extends React.Component {
     this.setState({ changedIndexes: tmpChangedSessions });
   }
 
-  saveModalDetails(item) {
+  saveModalDetails(item, modification) {
     const requiredItem = this.state.requiredItem;
     let tempbrochure = this.state.brochure;
     let currentName = tempbrochure[requiredItem].SessionName;
@@ -65,8 +72,12 @@ export default class Home extends React.Component {
 
     tempbrochure[requiredItem] = item;
 
-    this.storeChangedSession(item, 'modified', sessionNameChanged);
-    this.setState({ brochure: tempbrochure });
+    this.storeChangedSession(item, modification, sessionNameChanged);
+    this.setState({ 
+      brochure: tempbrochure,
+      requiredItem: -1
+     });
+    
   }
 
   deleteItem(index) {
@@ -76,36 +87,40 @@ export default class Home extends React.Component {
 
     this.storeChangedSession(tmpSessionName, 'deleted')
     this.setState({ brochure: tempBrochure });
+    this.setState({requiredItem: -1})
   }
 
   saveChangesToFile() {
     console.log('Saving changes to filesystem...')
-
-    // console.log(JSON.stringify(this.state.changedSessions))
+    if (this.state.changedSessions.length < 1) {
+      return;
+    }
 
     axios.post('https://localhost:1337/sessions', {
       data: JSON.stringify(this.state.changedSessions)
     }).then(res => {
-      // console.log(res)
+      console.log(res);
     })
-
-    this.state.changedSessions = []
+    this.setState({ changedSessions: [] })
+    //this.state.changedSessions = []
   }
 
-  showModal() {
-    return (
-      <Modal
-        SessionName={''}
-        SessionType={''}
-        SyncDirectory={''}
-        Bandwidth={''}
-        saveModalDetails={this.saveModalDetails}
-      />
-    )
+  addSession() 
+  {
+    this.state.brochure.push({
+      SessionName: '',
+      SessionType: 'TX',
+      Bandwidth: { Rate: '' },
+      SyncDirectory: { Path: '' }
+    });
+
+    this.replaceModalItem(this.state.brochure.length - 1, 'added');
+
   }
 
 
   render() {
+    console.log('Rendering');
     const brochure = this.state.brochure.map((item, index) => {
       return (
         <tr key={index}>
@@ -113,12 +128,20 @@ export default class Home extends React.Component {
           <td>{item.SessionType}</td>
           <td>{item.SyncDirectory.Path}</td>
           <td>
-            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-              onClick={() => this.replaceModalItem(index)}>edit</button> {" "}
-            <button className="btn btn-danger" onClick={() => {
+            <button className="btn btn-primary" data-target="#exampleModal"
+              onClick={() => 
+                {
+                  this.replaceModalItem(index, 'modified')
+                }}>
+                  edit</button> {" "}
+
+            <button className="btn btn-danger" 
+            onClick={() => 
+            {
               this.deleteItem(index)
             }
-            }>remove</button>
+            }>
+              remove</button>
           </td>
         </tr>
       )
@@ -126,18 +149,23 @@ export default class Home extends React.Component {
 
     const requiredItem = this.state.requiredItem;
     let modalData = this.state.brochure[requiredItem];
-    var tmpModal;
+    if (this.state.requiredItem < 0) {
+      modalData = null;
+    }
+    console.log(modalData);
 
     return (
       <div>
         <div style={{ textAlign: "center" }}>
           <h1>Sessions configuration</h1>
-          <button className="btn btn-warning"
-            onClick={() => this.saveChangesToFile()
-            }>Save changes</button> {" "}
-          <button className='btn btn-info' data-toggle="modal" data-target="#exampleModal"
+          <button className="btn btn-warning" style={{outline:"none" }}
             onClick={() => {
-              tmpModal = true;
+              this.saveChangesToFile();
+            }
+            }>Save changes</button> {" "}
+          <button className='btn btn-info' data-target="#exampleModal"
+            onClick={() => {
+              this.addSession()
             }}>Add new session</button> {" "}
         </div>
 
@@ -145,7 +173,9 @@ export default class Home extends React.Component {
           <thead>
             <tr>
               <th scope="col">Session Name</th>
-              <th scope="col">Session Type</th>requiredItem
+              <th scope="col">Session Type</th>
+              <th scope="col">Sync Directory</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -153,33 +183,15 @@ export default class Home extends React.Component {
           </tbody>
         </table>
 
-        {tmpModal ? <Modal
-          SessionName={''}
-          SessionType={''}
-          SyncDirectory={''}
-          Bandwidth={''}
-          saveModalDetails={this.saveModalDetails}
-        />
-          :
-          (modalData ? <Modal
+        
+          {modalData ? <Modal
             SessionName={modalData.SessionName}
             SessionType={modalData.SessionType}
             SyncDirectory={modalData.SyncDirectory}
             Bandwidth={modalData.Bandwidth}
+            Modification={this.state.modification}
             saveModalDetails={this.saveModalDetails}
-          /> : null)}
-
-        {/* { modalData ?
-          <Modal
-            SessionName={modalData.SessionName}
-            SessionType={modalData.SessionType}
-            SyncDirectory={modalData.SyncDirectory}
-            Bandwidth={modalData.Bandwidth}
-            saveModalDetails={this.saveModalDetails}
-          />
-          :
-          null} */}
-
+          /> : null}
       </div>
     );
   }
