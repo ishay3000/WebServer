@@ -102,7 +102,8 @@ class Config extends Component {
             {brochure}
           </tbody>
         </table>
-        { modalData ?
+        {
+         modalData ?
           <Modal
             sessionName={modalData.sessionName}
             sessionType={modalData.sessionType}

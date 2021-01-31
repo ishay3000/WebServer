@@ -16,6 +16,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Stats from './Stats';
 
 
 const CheckUserLogged = (checkIfSignedIn) => {
@@ -30,6 +31,7 @@ const AuthedRoutes = ({ ...props }) => {
         <Menu {...props} />
         <GuardedRoute exact path='/' component={Home} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
         <GuardedRoute path='/about' component={About} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
+        <GuardedRoute path='/stats' component={Stats} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
         <GuardedRoute path='/config' component={Config} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
       </div>
     </div>

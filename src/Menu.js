@@ -23,6 +23,7 @@ const Menu = (props) => {
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="#hardware">Hardware</Nav.Link>
                             <Nav.Link href="/config">Config</Nav.Link>
+                            <Nav.Link href="/stats">Stats</Nav.Link>
                             <Nav.Link href="/about">About</Nav.Link>
                         </Nav>
                         <Nav>
