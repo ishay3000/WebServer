@@ -44,7 +44,6 @@ class MyModal extends Component {
         const errors = [];
         let formIsValid = true;
         //validate name
-        return true;
         if (!item.SessionName) {
             formIsValid = false;
             errors["name"] = "Cannot be empty";
@@ -128,40 +127,5 @@ class MyModal extends Component {
     }
 
 }
-
-
-// render() {
-//     return (
-//         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-//             <div className="modal-dialog" role="document">
-//                 <div className="modal-content">
-//                     <div className="modal-header">
-//                         <h5 className="modal-title" id="exampleModalLabel">Editing session</h5>
-//                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-//                             <span aria-hidden="true">&times;</span>
-//                         </button>
-//                     </div>
-//                     <div>
-//                         <div className="content">
-//                             <span className="modal-lable">Session Name:</span>
-//                                      //                         <div className="content">
-//                             <span className="modal-lable">Sync Directory:</span>
-//                             <input value={this.state.SyncDirectory.Path} type="text"  onChange={(e) => this.innerStateHandler('SyncDirectory', 'Path', e)} />
-//                         </div>
-//                         <div className="content">
-//                             <span className="modal-lable">Bandwidth:</span>
-//                             <input value={this.state.Bandwidth.Rate} type="text"  onChange={(e) => this.innerStateHandler('Bandwidth', 'Rate', e)} />
-//                         </div>         </div>
-//                     <div className="modal-footer">
-//                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-//                         <button type="button" className="btn btn-primary"   onClick={() => { this.handleSave() }}>Save changes</button>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-//}
-
 
 export default MyModal;
