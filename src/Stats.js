@@ -18,7 +18,8 @@ class Stats extends React.Component {
             requiredItem: 0,
             collection: [
               {
-                actionName: 'pass file',
+                actionName: 'File',
+                sessionName: 'Ishay session',
                 date: '31/1/2021',
                 sessionType: 'RX',
                 nameOfFile: '/home/Ishay/Ishayhamaniac.txt',
@@ -26,7 +27,8 @@ class Stats extends React.Component {
                 result: 'Success'
               }, 
               {
-                actionName: 'pass file',
+                actionName: 'File',
+                sessionName: 'Ishay session',
                 date: '31/1/2021',
                 sessionType: 'RX',
                 nameOfFile: '/home/Ishay/Ishayhamaniac.txt',
@@ -34,10 +36,11 @@ class Stats extends React.Component {
                 result: 'Success'
               }, 
               {
-                actionName: 'pass file',
+                actionName: 'Folder',
+                sessionName: 'Ishay session',
                 date: '31/1/2021',
                 sessionType: 'RX',
-                nameOfFile: '/home/Ishay/Ishayhamaniac.txt',
+                nameOfFile: '/home/Ishay/Ishayhamaniac',
                 syncDirectory: '/home/Ishay',
                 result: 'Success'
               }
@@ -58,6 +61,7 @@ class Stats extends React.Component {
             return(
                 <tr key={index}>
                     <td>{item.actionName}</td>
+                    <td>{item.sessionName}</td>
                     <td>{item.date}</td>
                     <td>{item.sessionType}</td>
                     <td>{item.nameOfFile}</td>
@@ -74,8 +78,9 @@ class Stats extends React.Component {
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                        <th scope="col"> Action</th>
-                        <th scope="col"> Date</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Session name</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Session Type</th>
                         <th scope="col">Name of File/Directory</th>
                         <th scope="col">Sync Directory</th>
