@@ -15,7 +15,12 @@ class MyModal extends Component {
             SyncDirectory: {},
             Bandwidth: '',
             modification: '',
-            errors: {},
+            errors: {
+                SessionName: '',
+                SyncDirectory: '',
+                Bandwidth: '',
+              },
+            
             show: false
         }
     }
