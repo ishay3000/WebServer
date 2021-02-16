@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import './stats.css'
+import { colors } from '@material-ui/core';
 
 
 class Stats extends React.Component {
@@ -72,7 +73,7 @@ class Stats extends React.Component {
 
         return(
             <div>
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: "center"}}>
                     <h1>Pillar of Salt Statistics</h1>
                 </div>
                 <table className="table table-striped">
