@@ -7,7 +7,7 @@ import Menu from './Menu'
 import About from './About'
 import Config from "./Config.js";
 import Home from "./Home.js";
-
+import Hardware from "./Hardware.js"
 
 // Scripts
 import 'jquery/dist/jquery.min.js';
@@ -32,6 +32,7 @@ const AuthedRoutes = ({ ...props }) => {
         <GuardedRoute exact path='/' component={Home} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
         <GuardedRoute path='/about' component={About} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
         <GuardedRoute path='/stats' component={Stats} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
+        <GuardedRoute path='/hardware' component={Hardware} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
         <GuardedRoute path='/config' component={Config} validatorFunction={CheckUserLogged(true)} redirectTo='/login' />
       </div>
     </div>
